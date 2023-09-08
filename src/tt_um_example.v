@@ -13,9 +13,9 @@ module tt_um_example (
 
   always @(posedge clk) begin
     if (!rst_n) begin
-      stage[0] = 0;
+      stage[0] <= 0;
     end else begin
-      stage[0] <= ui_in[0];
+      stage[0] <= &ui_in;
     end
   end
 
@@ -24,7 +24,7 @@ module tt_um_example (
     for (i = 0; i < 7; i = i + 1) begin
       always @(posedge clk) begin
         if (!rst_n) begin
-          stage[i+1] = 0;
+          stage[i+1] <= 0;
         end else begin
           stage[i+1] <= stage[i];
         end
@@ -33,7 +33,7 @@ module tt_um_example (
   endgenerate
 
   assign uo_out  = {8{stage[7]}};
-  assign uio_out = {8{stage[7]}};
-  assign uio_oe  = {8{stage[7]}};
+  assign uio_out = uio_in;
+  assign uio_oe  = {8{ena}};
 
 endmodule
