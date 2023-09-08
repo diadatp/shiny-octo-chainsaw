@@ -9,7 +9,7 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  reg [7:0] stage;
+  reg [479:0] stage;
 
   always @(posedge clk) begin
     if (!rst_n) begin
@@ -21,7 +21,7 @@ module tt_um_example (
 
   generate
     genvar i;
-    for (i = 0; i < 7; i = i + 1) begin
+    for (i = 0; i < 479; i = i + 1) begin
       always @(posedge clk) begin
         if (!rst_n) begin
           stage[i+1] <= 0;
@@ -32,7 +32,7 @@ module tt_um_example (
     end
   endgenerate
 
-  assign uo_out  = {8{stage[7]}};
+  assign uo_out  = {8{stage[479]}};
   assign uio_out = uio_in;
   assign uio_oe  = {8{ena}};
 
