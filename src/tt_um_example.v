@@ -13,7 +13,7 @@ module tt_um_example (
 
   always @(posedge clk) begin
     if (!rst_n) begin
-      stage[0] <= 1;
+      stage[0] <= 0;
     end else begin
       stage[0] <= &ui_in;
     end
@@ -24,7 +24,7 @@ module tt_um_example (
     for (i = 0; i < 99; i = i + 1) begin
       always @(posedge clk) begin
         if (!rst_n) begin
-          stage[i+1] <= 1;
+          stage[i+1] <= 0;
         end else begin
           stage[i+1] <= stage[i];
         end
