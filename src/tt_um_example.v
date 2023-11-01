@@ -19,6 +19,20 @@ module tt_um_example (
     end
   end
 
+  reg [3:0] counter;
+
+  always @(posedge clk) begin
+    if (!rst_n) begin
+      counter <= 14;
+    end else begin
+      if (0 == counter) begin
+        counter <= 14;
+      end else begin
+        counter <= counter - 1;
+      end
+    end
+  end
+
   generate
     genvar i;
     for (i = 0; i < 99; i = i + 1) begin
@@ -26,7 +40,9 @@ module tt_um_example (
         if (!rst_n) begin
           stage[i+1] <= 0;
         end else begin
-          stage[i+1] <= stage[i];
+          if (0 == counter) begin
+            stage[i+1] <= stage[i];
+          end
         end
       end
     end
